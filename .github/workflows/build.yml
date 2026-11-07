@@ -13,6 +13,12 @@ jobs:
         run: unzip AUTestProject.zip
       - name: Install Gradle
         run: sudo apt-get install -y gradle
+      - name: Create gradle.properties
+        run: |
+          cd AUTestProject
+          echo "android.useAndroidX=true" > gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
+          echo "org.gradle.jvmargs=-Xmx2048m" >> gradle.properties
       - name: Generate Wrapper
         run: cd AUTestProject && gradle wrapper --gradle-version 8.2
       - name: Build
